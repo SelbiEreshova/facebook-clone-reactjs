@@ -1,2 +1,2 @@
 # facebook-clone-reactjs
- A clone of FB using reactjs
+ Facebook clone with React.js and THE MERN Stack
