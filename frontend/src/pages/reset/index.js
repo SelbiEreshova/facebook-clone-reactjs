@@ -6,15 +6,18 @@ import { useState } from "react";
 import SearchAccount from "./SearchAccount";
 import CodeVerification from "./CodeVerification";
 import SendEmail from "./SendEmail";
+import Footer from "../../components/login/Footer";
+import ChangePassword from "./ChangePassword";
 export default function Reset() {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [visible, setVisible] = useState(2);
-  const { email, setEmail } = useState("");
-  const { error, setError } = useState("");
-  const { code, setCode } = useState("");
- 
+  const [visible, setVisible] = useState(3);
+  const [ email, setEmail ] = useState("");
+  const [ code, setCode ] = useState("");
+  const [password, setPassword] = useState("");
+  const [conf_password, setConf_password] = useState("");
+  const [error, setError] = useState("");
   const logout = () => {
     Cookies.set("user", "");
     dispatch({
@@ -59,7 +62,16 @@ export default function Reset() {
             error={error}
           />
         )}
+        {visible === 3 && (
+          <ChangePassword
+            password={password}
+            conf_password={conf_password}
+            setConf_password={setConf_password}
+            setPassword={setPassword}
+          />
+        )}
       </div>
+      <Footer />
     </div>
   );
 }
