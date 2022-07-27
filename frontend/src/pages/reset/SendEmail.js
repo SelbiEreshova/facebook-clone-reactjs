@@ -46,6 +46,11 @@ export default function SendEmail({
           <span>Facebook user</span>
         </div>
       </div>
+      {error && (
+        <div className="error_text" style={{ padding: "10px" }}>
+          {error}
+        </div>
+      )}
       <div className="reset_form_btns">
         <Link to="/login" className="gray_btn">
           Not You ?
@@ -53,8 +58,7 @@ export default function SendEmail({
         <button
           onClick={() => {
             sendEmail();
-          }}
-          type="submit"
+          }} 
           className="blue_btn"
         >
           Continue
