@@ -12,12 +12,14 @@ export default function Reset() {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [visible, setVisible] = useState(3);
-  const [ email, setEmail ] = useState("");
-  const [ code, setCode ] = useState("");
+  const [visible, setVisible] = useState(0);
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [conf_password, setConf_password] = useState("");
   const [error, setError] = useState("");
+  const [laoding, setLoading] = useState(false);
+  const [userInfos, setUserInfos] = useState("");
   const logout = () => {
     Cookies.set("user", "");
     dispatch({
@@ -51,9 +53,27 @@ export default function Reset() {
       </div>
       <div className="reset_wrap">
         {visible === 0 && (
-          <SearchAccount email={email} setEmail={setEmail} error={error} />
+          <SearchAccount
+            email={email}
+            setEmail={setEmail}
+            error={error}
+            setError={setError}
+            setLoading={setLoading}
+            setUserInfos={setUserInfos}
+            setVisible={setVisible}
+          />
         )}
-        {visible === 1 && <SendEmail user={user} />}
+        {visible === 1 && userInfos && (
+          <SendEmail
+            email={email}
+            userInfos={userInfos}
+            error={error}
+            setError={setError}
+            setLoading={setLoading}
+            setUserInfos={setUserInfos}
+            setVisible={setVisible}
+          />
+        )}
         {visible === 2 && (
           <CodeVerification
             user={user}
